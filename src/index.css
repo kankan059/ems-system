@@ -7,6 +7,14 @@
 }
 html , body{
   width: 100%;
-  background-color: #222;
+  background-color: #1c1c1c;
   color: white
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.taskInput{
+  @apply border-2 border-gray-400 w-lg py-1 px-7 rounded-md placeholder:text-sm
 }

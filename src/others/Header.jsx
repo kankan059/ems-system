@@ -16,7 +16,7 @@ const Header = () => {
         >
           <h2>About</h2>
           <h2>contact</h2>
-          <button>logout</button>
+          <button className="bg-red-700 rounded-md px-3 py-2 text-sm">logout</button>
         </section>
       </section>
     </>

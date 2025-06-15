@@ -1,11 +1,13 @@
 import React from 'react'
 import Login from './components/auth/Login'
-import EmployeDash from './components/DashBoard/EmployeeDashboard'
+import EmployeeDashboard from './components/DashBoard/EmployeeDashboard'
+import AdminDashBoard from './components/DashBoard/AdminDashboard'
 const App = () => {
   return (
     <>
     {/* <Login/> */}
-    <EmployeDash/>
+    {/* <EmployeeDashboard/> */}
+    <AdminDashBoard />
     </>
   )
 }
