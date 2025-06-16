@@ -1,6 +1,6 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({data}) => {
   return (
     <>
       <section
@@ -8,7 +8,7 @@ const Header = () => {
         className="flex justify-between items-center px-10 pt-5 text-2xl bg-[ #1c1c1c]"
       >
         <div id="home" className="font-semibold">
-          Hello <span className="font-medium text-3xl">kongkon😁</span>
+          Hello <span className="font-medium text-3xl">{data.firstname}😁</span>
         </div>
         <section
           id="2ndPart"
