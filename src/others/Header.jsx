@@ -1,6 +1,11 @@
 import React from "react";
 
 const Header = ({data}) => {
+
+  const logout = () =>{
+    localStorage.setItem('loggedInUser' , '');
+    window.location.reload();
+  }
   return (
     <>
       <section
@@ -16,7 +21,7 @@ const Header = ({data}) => {
         >
           <h2>About</h2>
           <h2>contact</h2>
-          <button className="bg-red-700 rounded-md px-3 py-2 text-sm">logout</button>
+          <button onClick={logout} className="bg-red-700 rounded-md px-3 py-2 text-sm">logout</button>
         </section>
       </section>
     </>

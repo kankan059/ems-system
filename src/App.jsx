@@ -6,35 +6,37 @@ import { AuthContext } from "./context/AuthProvider";
 
 const App = () => {
   const authData = useContext(AuthContext);
-  const [user, setuser] = useState(null);
-  const [setUserData, setsetUserData] = useState(null)
+  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
-  // useEffect(() => {
-  //   const loggedInUser = localStorage.getItem("loggedInUser");
-  //   if (loggedInUser) {
-  //     setuser(JSON.parse(loggedInUser));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      const parsedUser = JSON.parse(loggedInUser);
+      setUser({ role: parsedUser.role });
+      setUserData(parsedUser); // contains full user info
+    }
+  }, [authData]);
 
   const handleLogin = (email, password) => {
     if (authData) {
       const adminData = authData.admin.find(
-        (e) => e.email === email && e.password === password
+        (e) => e.email == email && e.password == password
       );
       const employeeData = authData.employees.find(
-        (e) => e.email === email && e.password === password
+        (e) => e.email == email && e.password == password
       );
 
       if (adminData) {
-        const userData = { role: "admin" };
+        const userData = { role: "admin", ...adminData };
         localStorage.setItem("loggedInUser", JSON.stringify(userData));
-        setsetUserData(adminData);
-        setuser(userData);
+        setUser({ role: "admin" });
+        setUserData(adminData);
       } else if (employeeData) {
-        const userData = { role: "employee" };
+        const userData = { role: "employee", ...employeeData };
         localStorage.setItem("loggedInUser", JSON.stringify(userData));
-        setsetUserData(employeeData);
-        setuser(userData);
+        setUser({ role: "employee" });
+        setUserData(employeeData);
       } else {
         alert("Invalid credentials!!");
       }
@@ -43,7 +45,13 @@ const App = () => {
 
   return (
     <>
-      {!user ? (<Login handleLogin={handleLogin} />) : user.role === "admin" ? (<AdminDashboard data={setUserData} />) : user.role === "employee" ? (<EmployeeDashboard data={setUserData}/>) : null}
+      {!user ? (
+        <Login handleLogin={handleLogin} />
+      ) : user.role === "admin" ? (
+        <AdminDashboard data={userData} />
+      ) : user.role === "employee" ? (
+        <EmployeeDashboard data={userData} />
+      ) : null}
     </>
   );
 };

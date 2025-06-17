@@ -8,9 +8,9 @@ const TaskNumber = ({data}) => {
   return (
     <div className="w-full flex gap-4 shrink-0 flex-nowrap overflow-x-auto h-[40%] mt-5">
       <NewTask data={data} />
-      <AcceptTask />
-      <CompleteTask />
-      <FailedTask />
+      <AcceptTask data={data}/>
+      <CompleteTask data={data}/>
+      <FailedTask data={data} />
     </div>
   );
 };
