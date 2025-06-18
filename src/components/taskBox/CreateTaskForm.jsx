@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 
 const CreateTaskForm = () => {
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-  const [employeeName, setEmployeeName] = useState("");
-  const [cat, setCat] = useState("");
-  const [desc, setDesc] = useState("");
-
+  const [task_title, settask_title] = useState("");
+  const [task_date, settask_date] = useState("");
+  const [firstname, setEmployeeName] = useState("");
+  const [task_category, settask_category] = useState("");
+  const [task_description, settask_description] = useState("");
+  let found = false;
   let getData = (e) => {
     e.preventDefault();
-    console.log(name, date, employeeName, cat, desc);
-    setName("");
-    setDate("");
-    setCat("");
-    setDesc("");
+    const userNewData = {
+      task_title,
+      task_date,
+      task_category,
+      task_description,
+      active: false,
+      new_task: true,
+      failed: false,
+    };
+    const data = JSON.parse(localStorage.getItem('employees'))
+    console.log(data)
+    data.forEach(e=>{
+      if(e.firstname == firstname){
+        e.tasks.push(userNewData)
+        found = true;
+      }
+    })
+    if(!found) alert (`NO! name with ${firstname}`);
+
+    localStorage.setItem('employees' , JSON.stringify(data))
+
+    settask_title("");
+    settask_date("");
+    settask_category("");
+    settask_description("");
     setEmployeeName("");
   };
 
@@ -21,26 +41,26 @@ const CreateTaskForm = () => {
     <div className="h-full w-full p-3">
       <form className="flex justify-between w-full p-4">
         <section id="frist-part" className="flex flex-col">
-          <label className="mt-5" htmlFor="task-title">
+          <label className="mt-5" htmlFor="task-task_title">
             Task Title
           </label>
           <input
-            value={name}
+            value={task_title}
             onChange={(e) => {
-              setName(e.target.value);
+              settask_title(e.target.value);
             }}
             type="text"
-            name="Task-title"
+            name="Task-task_title"
             placeholder="Make a ui desgn"
             className="taskInput"
           />
-          <label className="mt-5" htmlFor="date">
+          <label className="mt-5" htmlFor="task_date">
             Date
           </label>
           <input
-            value={date}
+            value={task_date}
             onChange={(e) => {
-              setDate(e.target.value);
+              settask_date(e.target.value);
             }}
             type="date"
             placeholder="dd/mm/yy"
@@ -50,7 +70,7 @@ const CreateTaskForm = () => {
             Asign to
           </label>
           <input
-            value={employeeName}
+            value={firstname}
             onChange={(e) => {
               setEmployeeName(e.target.value);
             }}
@@ -58,13 +78,13 @@ const CreateTaskForm = () => {
             placeholder="employee name"
             className="taskInput"
           />
-          <label className="mt-5" htmlFor="category">
+          <label className="mt-5" htmlFor="task_categoryegory">
             Category
           </label>
           <input
-            value={cat}
+            value={task_category}
             onChange={(e) => {
-              setCat(e.target.value);
+              settask_category(e.target.value);
             }}
             type="text"
             placeholder="design,dev etc"
@@ -72,16 +92,16 @@ const CreateTaskForm = () => {
           />
         </section>
         <section id="second-part" className="flex flex-col justify-start">
-          <label className="mt-5" htmlFor="description">
-            Description
+          <label className="mt-5" htmlFor="task_descriptionription">
+            Description 
           </label>
           <textarea
-            value={desc}
+            value={task_description}
             onChange={(e) => {
-              setDesc(e.target.value);
+              settask_description(e.target.value);
             }}
-            name="desc"
-            id="desc"
+            name="task_description"
+            id="task_description"
             className="w-sm border-2 border-gray-400 h-[70%] rounded-lg"
           ></textarea>
           <button

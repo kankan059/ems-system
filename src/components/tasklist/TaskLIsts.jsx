@@ -5,6 +5,7 @@ const TaskLIsts = ({ data }) => {
   // data.tasks.map(e=>{
 
   // })
+  
   const colors = ["bg-orange-300", "bg-blue-300", "bg-green-300", "bg-pink-300", "bg-yellow-300"];
 
   return (

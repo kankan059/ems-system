@@ -1,7 +1,8 @@
 import React from "react";
 
-const Header = ({data}) => {
+const Header = (props) => {
 
+  // console.log(props)
   const logout = () =>{
     localStorage.setItem('loggedInUser' , '');
     window.location.reload();
@@ -13,7 +14,7 @@ const Header = ({data}) => {
         className="flex justify-between items-center px-10 pt-5 text-2xl bg-[ #1c1c1c]"
       >
         <div id="home" className="font-semibold">
-          Hello <span className="font-medium text-3xl">{data.firstname}😁</span>
+          Hello <span className="font-medium text-3xl">{props.data.firstname}😁</span>
         </div>
         <section
           id="2ndPart"
